@@ -1,4 +1,5 @@
 import pygame
+import sys
 from grid import Grid
 from food import Food
 from score import Score
@@ -36,7 +37,7 @@ class Game:
             self.game_over()
         elif self.snake.collides_with_food(self.food):
             self.snake.grow()
-            self.food = Food.generate_food(self.grid.width, self.grid.height)
+            self.food = Food(10, 10)  # Assuming Food's constructor generates a new food
             self.score.update_score(10)
 
     def render(self):
@@ -48,12 +49,18 @@ class Game:
         pygame.display.flip()
 
     def game_over(self):
-        # Display game over screen with final score and options to restart or quit
-        pass
+        font = pygame.font.Font(None, 36)
+        text = font.render("Game Over", True, (255, 0, 0))
+        text_rect = text.get_rect()
+        text_rect.center = (400, 300)  # Center of the screen
+        self.screen.blit(text, text_rect)
+        pygame.display.flip()
+        pygame.time.wait(2000)  # Wait for 2 seconds before restarting
+        self.restart_game()
 
     def restart_game(self):
-        self.snake.reset()
-        self.food = Food.generate_food(self.grid.width, self.grid.height)
+        self.snake = Snake(20, 15)  # Resetting the snake by creating a new instance
+        self.food = Food(10, 10)  # Resetting the food by creating a new instance
         self.score.reset()
 
     def run(self):
