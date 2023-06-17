@@ -37,7 +37,7 @@ class Game:
             self.game_over()
         elif self.snake.collides_with_food(self.food):
             self.snake.grow()
-            self.food = Food(10, 10)  # Assuming Food's constructor generates a new food
+            self.food.regenerate(self.grid.width, self.grid.height)  # Move the food to a new random position
             self.score.update_score(10)
 
     def render(self):
