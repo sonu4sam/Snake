@@ -32,7 +32,7 @@ class Game:
                     self.snake.move("RIGHT")
 
     def update(self):
-        self.snake.update()
+        self.snake.update(self.grid.width, self.grid.height)
         if self.snake.collides_with_self() or self.snake.collides_with_boundary(self.grid.width, self.grid.height):
             self.game_over()
         elif self.snake.collides_with_food(self.food):

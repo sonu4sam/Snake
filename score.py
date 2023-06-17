@@ -25,3 +25,7 @@ class Score:
         time_text = self.font.render(f"Time: {self.get_elapsed_time()}", True, (0, 0, 0))
         surface.blit(score_text, (10, 10))
         surface.blit(time_text, (10, 50))
+
+    def reset(self):
+        self.score = 0
+        self.timer = 0

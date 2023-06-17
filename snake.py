@@ -4,7 +4,7 @@ class Snake:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.length = 1
+        self.length = 3
         self.body = [(x, y)]
         self.direction = "RIGHT"
 
@@ -18,15 +18,15 @@ class Snake:
         elif direction == "RIGHT" and self.direction != "LEFT":
             self.direction = "RIGHT"
 
-    def update(self):
+    def update(self, grid_width, grid_height):
         if self.direction == "UP":
-            self.y -= 1
+            self.y = (self.y - 1) % grid_height
         elif self.direction == "DOWN":
-            self.y += 1
+            self.y = (self.y + 1) % grid_height
         elif self.direction == "LEFT":
-            self.x -= 1
+            self.x = (self.x - 1) % grid_width
         elif self.direction == "RIGHT":
-            self.x += 1
+            self.x = (self.x + 1) % grid_width
         self.body.append((self.x, self.y))
         if len(self.body) > self.length:
             del self.body[0]
